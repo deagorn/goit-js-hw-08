@@ -25,4 +25,3 @@ gallery.innerHTML = markup;
  // creating a modal window
     var lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt',
      captionDelay: 250  });
-
