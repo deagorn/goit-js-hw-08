@@ -7,11 +7,9 @@ const refs = {
 }
 
 const STORAGE_KEY = "formData";
-const saveMessege = JSON.parse(localStorage.getItem(STORAGE_KEY));
+
 
 const formData = {
-    email: saveMessege.email,
-    message: saveMessege.message,
 };
 
 refs.form.addEventListener('submit', onFormSubmit);
@@ -22,6 +20,7 @@ RecordingSavedForm();
 function onFormSubmit(e) {
     e.preventDefault();
 
+    console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
     e.target.reset();
     localStorage.removeItem(STORAGE_KEY);
     formData.email = '';
@@ -34,20 +33,31 @@ function onInput(e) {
 }
 
 function RecordingSavedForm() {
+    const saveMessege = JSON.parse(localStorage.getItem(STORAGE_KEY));
+
+    if (!saveMessege) {
+        refs.email.value = '';
+        formData.email = '';
+        refs.textarea.value = '';
+        formData.message = '';
+        return;
+    }
 
     if (saveMessege.email) {
         refs.email.value = saveMessege.email;
+        formData.email = saveMessege.email;
     } else {
         refs.email.value = '';
+        formData.email = '';
     }
 
     if (saveMessege.message) {
         refs.textarea.value = saveMessege.message;
+        formData.message = saveMessege.message;
     } else {
         refs.textarea.value = '';
+        formData.message = '';
     }
-
-    
 }
 
     
