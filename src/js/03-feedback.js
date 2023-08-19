@@ -8,7 +8,6 @@ const refs = {
 
 const STORAGE_KEY = "formData";
 
-
 const formData = {
 };
 
@@ -20,11 +19,15 @@ RecordingSavedForm();
 function onFormSubmit(e) {
     e.preventDefault();
 
-    console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
-    e.target.reset();
-    localStorage.removeItem(STORAGE_KEY);
-    formData.email = '';
-    formData.message = '';
+    if (refs.email.value === '' || refs.textarea.value.trim() === '') {
+        alert('Please fill all fields');
+    } else {
+        console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
+        e.target.reset();
+        localStorage.removeItem(STORAGE_KEY);
+        formData.email = '';
+        formData.message = '';
+    }
 }
 
 function onInput(e) {
